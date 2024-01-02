@@ -1,4 +1,18 @@
-import { HttpStatusCodes, IGenericError, IServiceResponse } from "./interfaces";
+import { HttpStatusCodes } from "./http-codes";
+
+export interface IGenericError<T = unknown> {
+	message?: string;
+	data?: T;
+	extra?: any;
+}
+
+export interface IServiceResponse<T = unknown, E = unknown> {
+	status: HttpStatusCodes;
+	message?: string;
+	data?: T;
+	error?: IGenericError<E>;
+	success: boolean;
+}
 
 export class HttpResponse {
 	// Informacionais

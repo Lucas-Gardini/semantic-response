@@ -72,17 +72,3 @@ export enum HttpStatusCodes {
 	NOT_EXTENDED = 510,
 	NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
-
-export interface IGenericError<T = unknown> {
-	message?: string;
-	data?: T;
-	extra?: any;
-}
-
-export interface IServiceResponse<T = unknown, E = unknown> {
-	status: HttpStatusCodes;
-	message?: string;
-	data?: T;
-	error?: IGenericError<E>;
-	success: boolean;
-}
