@@ -1,6 +1,6 @@
 {
 	"name": "semantic-response",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Simple Node.js package that aims to create standardized responses for HTTP applications.",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
