@@ -73,6 +73,8 @@ export enum HttpStatusCodes {
 	NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
 
+export type GenericError<T = unknown> = IGenericError<T> | string;
+
 export interface IGenericError<T = unknown> {
 	message?: string;
 	data?: T;
@@ -83,7 +85,7 @@ export interface IServiceResponse<T = unknown, E = unknown> {
 	status: HttpStatusCodes;
 	message?: string;
 	data?: T;
-	error?: IGenericError<E>;
+	error?: GenericError<E>;
 	success: boolean;
 }
 
@@ -231,7 +233,7 @@ export class HttpResponse {
 
 	// Redirecionamentos
 	// MULTIPLE_CHOICES = 300
-	public static multipleChoices<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static multipleChoices<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.MULTIPLE_CHOICES,
@@ -241,7 +243,7 @@ export class HttpResponse {
 	}
 
 	// MOVED_PERMANENTLY = 301
-	public static movedPermanently<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static movedPermanently<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.MOVED_PERMANENTLY,
@@ -251,7 +253,7 @@ export class HttpResponse {
 	}
 
 	// FOUND = 302
-	public static found<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static found<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.FOUND,
@@ -261,7 +263,7 @@ export class HttpResponse {
 	}
 
 	// SEE_OTHER = 303
-	public static seeOther<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static seeOther<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.SEE_OTHER,
@@ -271,7 +273,7 @@ export class HttpResponse {
 	}
 
 	// NOT_MODIFIED = 304
-	public static notModified<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static notModified<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NOT_MODIFIED,
@@ -281,7 +283,7 @@ export class HttpResponse {
 	}
 
 	// USE_PROXY = 305
-	public static useProxy<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static useProxy<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.USE_PROXY,
@@ -291,7 +293,7 @@ export class HttpResponse {
 	}
 
 	// SWITCH_PROXY = 306
-	public static switchProxy<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static switchProxy<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.SWITCH_PROXY,
@@ -301,7 +303,7 @@ export class HttpResponse {
 	}
 
 	// TEMPORARY_REDIRECT = 307
-	public static temporaryRedirect<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static temporaryRedirect<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.TEMPORARY_REDIRECT,
@@ -311,7 +313,7 @@ export class HttpResponse {
 	}
 
 	// PERMANENT_REDIRECT = 308
-	public static permanentRedirect<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static permanentRedirect<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PERMANENT_REDIRECT,
@@ -322,7 +324,7 @@ export class HttpResponse {
 
 	// Erros do cliente
 	// BAD_REQUEST = 400
-	public static badRequest<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static badRequest<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.BAD_REQUEST,
@@ -332,7 +334,7 @@ export class HttpResponse {
 	}
 
 	// UNAUTHORIZED = 401
-	public static unauthorized<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static unauthorized<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.UNAUTHORIZED,
@@ -342,7 +344,7 @@ export class HttpResponse {
 	}
 
 	// PAYMENT_REQUIRED = 402
-	public static paymentRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static paymentRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PAYMENT_REQUIRED,
@@ -352,7 +354,7 @@ export class HttpResponse {
 	}
 
 	// FORBIDDEN = 403
-	public static forbidden<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static forbidden<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.FORBIDDEN,
@@ -362,7 +364,7 @@ export class HttpResponse {
 	}
 
 	// NOT_FOUND = 404
-	public static notFound<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static notFound<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NOT_FOUND,
@@ -372,7 +374,7 @@ export class HttpResponse {
 	}
 
 	// METHOD_NOT_ALLOWED = 405
-	public static methodNotAllowed<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static methodNotAllowed<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.METHOD_NOT_ALLOWED,
@@ -382,7 +384,7 @@ export class HttpResponse {
 	}
 
 	// NOT_ACCEPTABLE = 406
-	public static notAcceptable<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static notAcceptable<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NOT_ACCEPTABLE,
@@ -392,7 +394,7 @@ export class HttpResponse {
 	}
 
 	// PROXY_AUTHENTICATION_REQUIRED = 407
-	public static proxyAuthenticationRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static proxyAuthenticationRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PROXY_AUTHENTICATION_REQUIRED,
@@ -402,7 +404,7 @@ export class HttpResponse {
 	}
 
 	// REQUEST_TIMEOUT = 408
-	public static requestTimeout<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static requestTimeout<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.REQUEST_TIMEOUT,
@@ -412,7 +414,7 @@ export class HttpResponse {
 	}
 
 	// CONFLICT = 409
-	public static conflict<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static conflict<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.CONFLICT,
@@ -422,7 +424,7 @@ export class HttpResponse {
 	}
 
 	// GONE = 410
-	public static gone<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static gone<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.GONE,
@@ -432,7 +434,7 @@ export class HttpResponse {
 	}
 
 	// LENGTH_REQUIRED = 411
-	public static lengthRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static lengthRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.LENGTH_REQUIRED,
@@ -442,7 +444,7 @@ export class HttpResponse {
 	}
 
 	// PRECONDITION_FAILED = 412
-	public static preconditionFailed<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static preconditionFailed<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PRECONDITION_FAILED,
@@ -452,7 +454,7 @@ export class HttpResponse {
 	}
 
 	// PAYLOAD_TOO_LARGE = 413
-	public static payloadTooLarge<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static payloadTooLarge<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PAYLOAD_TOO_LARGE,
@@ -462,7 +464,7 @@ export class HttpResponse {
 	}
 
 	// URI_TOO_LONG = 414
-	public static uriTooLong<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static uriTooLong<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.URI_TOO_LONG,
@@ -472,7 +474,7 @@ export class HttpResponse {
 	}
 
 	// UNSUPPORTED_MEDIA_TYPE = 415
-	public static unsupportedMediaType<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static unsupportedMediaType<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.UNSUPPORTED_MEDIA_TYPE,
@@ -482,7 +484,7 @@ export class HttpResponse {
 	}
 
 	// RANGE_NOT_SATISFIABLE = 416
-	public static rangeNotSatisfiable<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static rangeNotSatisfiable<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.RANGE_NOT_SATISFIABLE,
@@ -492,7 +494,7 @@ export class HttpResponse {
 	}
 
 	// EXPECTATION_FAILED = 417
-	public static expectationFailed<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static expectationFailed<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.EXPECTATION_FAILED,
@@ -502,7 +504,7 @@ export class HttpResponse {
 	}
 
 	// I_AM_A_TEAPOT = 418
-	public static iAmATeapot<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static iAmATeapot<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.I_AM_A_TEAPOT,
@@ -512,7 +514,7 @@ export class HttpResponse {
 	}
 
 	// MISDIRECTED_REQUEST = 421
-	public static misdirectedRequest<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static misdirectedRequest<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.MISDIRECTED_REQUEST,
@@ -522,7 +524,7 @@ export class HttpResponse {
 	}
 
 	// UNPROCESSABLE_ENTITY = 422
-	public static unprocessableEntity<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static unprocessableEntity<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.UNPROCESSABLE_ENTITY,
@@ -532,7 +534,7 @@ export class HttpResponse {
 	}
 
 	// LOCKED = 423
-	public static locked<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static locked<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.LOCKED,
@@ -542,7 +544,7 @@ export class HttpResponse {
 	}
 
 	// FAILED_DEPENDENCY = 424
-	public static failedDependency<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static failedDependency<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.FAILED_DEPENDENCY,
@@ -552,7 +554,7 @@ export class HttpResponse {
 	}
 
 	// TOO_EARLY = 425
-	public static tooEarly<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static tooEarly<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.TOO_EARLY,
@@ -562,7 +564,7 @@ export class HttpResponse {
 	}
 
 	// UPGRADE_REQUIRED = 426
-	public static upgradeRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static upgradeRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.UPGRADE_REQUIRED,
@@ -572,7 +574,7 @@ export class HttpResponse {
 	}
 
 	// PRECONDITION_REQUIRED = 428
-	public static preconditionRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static preconditionRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.PRECONDITION_REQUIRED,
@@ -582,7 +584,7 @@ export class HttpResponse {
 	}
 
 	// TOO_MANY_REQUESTS = 429
-	public static tooManyRequests<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static tooManyRequests<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.TOO_MANY_REQUESTS,
@@ -592,7 +594,7 @@ export class HttpResponse {
 	}
 
 	// REQUEST_HEADER_FIELDS_TOO_LARGE = 431
-	public static requestHeaderFieldsTooLarge<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static requestHeaderFieldsTooLarge<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.REQUEST_HEADER_FIELDS_TOO_LARGE,
@@ -602,7 +604,7 @@ export class HttpResponse {
 	}
 
 	// UNAVAILABLE_FOR_LEGAL_REASONS = 451
-	public static unavailableForLegalReasons<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static unavailableForLegalReasons<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.UNAVAILABLE_FOR_LEGAL_REASONS,
@@ -613,7 +615,7 @@ export class HttpResponse {
 
 	// Erros do servidor
 	// INTERNAL_SERVER_ERROR = 500
-	public static internalServerError<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static internalServerError<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.INTERNAL_SERVER_ERROR,
@@ -623,7 +625,7 @@ export class HttpResponse {
 	}
 
 	// NOT_IMPLEMENTED = 501
-	public static notImplemented<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static notImplemented<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NOT_IMPLEMENTED,
@@ -633,7 +635,7 @@ export class HttpResponse {
 	}
 
 	// BAD_GATEWAY = 502
-	public static badGateway<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static badGateway<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.BAD_GATEWAY,
@@ -643,7 +645,7 @@ export class HttpResponse {
 	}
 
 	// SERVICE_UNAVAILABLE = 503
-	public static serviceUnavailable<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static serviceUnavailable<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.SERVICE_UNAVAILABLE,
@@ -653,7 +655,7 @@ export class HttpResponse {
 	}
 
 	// GATEWAY_TIMEOUT = 504
-	public static gatewayTimeout<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static gatewayTimeout<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.GATEWAY_TIMEOUT,
@@ -663,7 +665,7 @@ export class HttpResponse {
 	}
 
 	// HTTP_VERSION_NOT_SUPPORTED = 505
-	public static httpVersionNotSupported<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static httpVersionNotSupported<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.HTTP_VERSION_NOT_SUPPORTED,
@@ -673,7 +675,7 @@ export class HttpResponse {
 	}
 
 	// VARIANT_ALSO_NEGOTIATES = 506
-	public static variantAlsoNegotiates<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static variantAlsoNegotiates<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.VARIANT_ALSO_NEGOTIATES,
@@ -683,7 +685,7 @@ export class HttpResponse {
 	}
 
 	// INSUFFICIENT_STORAGE = 507
-	public static insufficientStorage<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static insufficientStorage<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.INSUFFICIENT_STORAGE,
@@ -693,7 +695,7 @@ export class HttpResponse {
 	}
 
 	// LOOP_DETECTED = 508
-	public static loopDetected<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static loopDetected<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.LOOP_DETECTED,
@@ -703,7 +705,7 @@ export class HttpResponse {
 	}
 
 	// NOT_EXTENDED = 510
-	public static notExtended<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static notExtended<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NOT_EXTENDED,
@@ -713,7 +715,7 @@ export class HttpResponse {
 	}
 
 	// NETWORK_AUTHENTICATION_REQUIRED = 511
-	public static networkAuthenticationRequired<E>(error?: IGenericError<E>, message?: string): IServiceResponse<null, E> {
+	public static networkAuthenticationRequired<E>(error?: GenericError<E>, message?: string): IServiceResponse<null, E> {
 		return {
 			success: false,
 			status: HttpStatusCodes.NETWORK_AUTHENTICATION_REQUIRED,
